@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="assets/css/untitled-3.css">
     <link rel="stylesheet" href="assets/css/untitled.css">
     <link rel="stylesheet" href="assets/css/vanilla-zoom.min.css">
+    <link rel="stylesheet" href="assets/bootstrap/css/star.css">
     <style>
         .sharing{
             padding: 5px !important;
@@ -60,10 +61,10 @@
     </nav>
     <main class="page blog-post">
         <section class="clean-block clean-post dark" >
-            <div class="container" style="direction: rtl;">
+            <div class="container">
                 <div class="block-content">
                     <div class="post-image" style="background-image: url(&quot;assets/img/scenery/side-view-dolma-stuffed-grape-leaves-with-ground-meat-onion-greens.jpg&quot;);"></div>
-                    <div class="post-body">
+                    <div class="post-body" style="direction: rtl;">
                         <!-- <h3>Lorem Ipsum dolor</h3>
                         <div class="post-info"><span>By John Smith</span><span>Jan 27, 2018</span></div>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna, dignissim nec auctor in, mattis vitae leo. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna, dignissim nec auctor in, mattis vitae leo. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna, dignissim nec auctor in, mattis vitae leo. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
@@ -112,7 +113,45 @@
                         </div>
 
                         <h4>طرز تهیه دلمه برگ مو</h4>
-                        <div class="post-info"><span>writer narges safary</span>&nbsp;&nbsp;<span>&nbsp;&nbsp; ابان1389 20</span></div>
+                       <div class="row">
+                        <div class="col-md-12">
+                            <div class="star-wrapper">
+                                <label id="number"></label>
+                                <a id="set5"  class="fas fa-star s1" onclick="myFunction5(); set5()"></a>
+                                <a id="set4"  class="fas fa-star s2" onclick="myFunction4(); set4()"></a>
+                                <a id="set3"  class="fas fa-star s3" onclick="myFunction3(); set3()"></a>
+                                <a id="set2"  class="fas fa-star s4" onclick="myFunction2(); set2()"></a>
+                                <a id="set1"  class="fas fa-star s5"  onclick="myFunction1(); set1()"></a>
+                                
+                              </div>
+                        </div>
+
+                       </div>
+                          <script src="https://kit.fontawesome.com/5ea815c1d0.js"></script>
+                        <div class="post-info"><span>writer narges safary</span>&nbsp;&nbsp;<span>&nbsp;&nbsp; ابان1389 20</span>&nbsp;&nbsp;</div>
+                           
+                        <!-- <div class="row">
+                            <div class="col-md-4">
+                                <div class="post-info"><span>writer narges safary</span></div>
+                            </div>
+                            <div class="col-md-4">
+                                <span> ابان1389 20</span>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="star-wrapper">
+                                    <label id="number"></label>
+                                    <a id="set5"  class="fas fa-star s1" onclick="myFunction5(); set5()"></a>
+                                    <a id="set4"  class="fas fa-star s2" onclick="myFunction4(); set4()"></a>
+                                    <a id="set3"  class="fas fa-star s3" onclick="myFunction3(); set3()"></a>
+                                    <a id="set2"  class="fas fa-star s4" onclick="myFunction2(); set2()"></a>
+                                    <a id="set1"  class="fas fa-star s5"  onclick="myFunction1(); set1()"></a>
+                                    
+                                  </div>
+                                  <script src="https://kit.fontawesome.com/5ea815c1d0.js"></script>
+                                
+                                  
+                            </div> 
+                        </div>-->
                         <b><label> مواد لازم برای ۴ نفر</label></b><br>
                         <label>برنج	:۲ لیوان</label><br>
                         <label>لپه:	۱۰۰ گرم</label><br>
@@ -245,6 +284,70 @@
     <script src="assets/js/baguetteBox.min.js"></script>
     <script src="assets/js/vanilla-zoom.js"></script>
     <script src="assets/js/theme.js"></script>
+    <script>
+
+        function myFunction1() {
+           document.getElementById("number").innerHTML = 1;
+        }
+        function set1() {
+          var n;
+          n = document.getElementById("set1");
+          n.style.color = "#ffd700";
+      
+        }
+        function myFunction2() {
+        document.getElementById("number").innerHTML = 2;
+      }
+      function set2() {
+          var n,n2;
+          n = document.getElementById("set1");
+          n2 = document.getElementById("set2");
+          n.style.color = "#ffd700";
+          n2.style.color = "#ffd700";
+        }
+      function myFunction3() {
+        document.getElementById("number").innerHTML = 3;
+      }
+      function set3() {
+          var n,n2,n3;
+          n = document.getElementById("set1");
+          n2 = document.getElementById("set2");
+          n3 = document.getElementById("set3");
+          n.style.color = "#ffd700";
+          n2.style.color = "#ffd700";
+          n3.style.color = "#ffd700";
+        }
+      function myFunction4() {
+        document.getElementById("number").innerHTML =4;
+      }
+      function set4() {
+          var n,n2,n3,n4;
+          n = document.getElementById("set1");
+          n2 = document.getElementById("set2");
+          n3 = document.getElementById("set3");
+          n4 = document.getElementById("set4");
+          n.style.color = "#ffd700";
+          n2.style.color = "#ffd700";
+          n3.style.color = "#ffd700";
+          n4.style.color = "#ffd700";
+        }
+      function myFunction5() {
+        document.getElementById("number").innerHTML = 5;
+      }
+      function set5() {
+          var n,n2,n3,n4,n5;
+          n = document.getElementById("set1");
+          n2 = document.getElementById("set2");
+          n3 = document.getElementById("set3");
+          n4 = document.getElementById("set4");
+          n5 = document.getElementById("set5");
+          n.style.color = "#ffd700";
+          n2.style.color = "#ffd700";
+          n3.style.color = "#ffd700";
+          n4.style.color = "#ffd700";
+          n5.style.color = "#ffd700";
+        }
+      </script>
 </body>
 
 </html>
