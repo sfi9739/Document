@@ -1,18 +1,16 @@
-@font-face {
-    font-family: iransans;
-    src: url(fonts/IRANSans.ttf) format('ttf');
-}
+
 body{
-    font-family: iransans;
     direction: rtl;
 }
 
+
+
 .nav-link:hover{
 
-    color: white;
-    background-color:#0d6efd;;
-    border-radius: 6px;
-  
+    color:#0d6efd;
+
+ 
 }
+
 
 

@@ -14,15 +14,26 @@
     <link rel="stylesheet" href="../../assets/panel_users/css/bootstrap.min.css" />
     <!-- https://getbootstrap.com/ -->
     <link rel="stylesheet" href="../../assets/panel_users/css/templatemo-style.css">
-    <link rel="stylesheet" href="../../assets/css/menu1.css">
 
     <!--
 	Product Admin CSS Template
 	https://templatemo.com/tm-524-product-admin
 	-->
+  <style>
+    
+    @font-face {
+    font-family: vazir;
+    src: url(../../assets/Font/Vazir-Medium.eot) format('eot'),
+         url(../../assets/Font/Vazir-Medium.ttf) format('ttf'),
+         url(../../assets/Font/Vazir-Medium.woff) format('woff'),
+         url(../../assets/Font/Vazir-Medium.woff2) format('woff2');
+}
+   
+</style>
+
   </head>
 
-  <body id="reportsPage" dir="rtl" style=" text-align:right; ">
+  <body id="reportsPage" dir="rtl" style=" text-align:right;font-family: vazir; ">
     <div class="" id="home">
       <!--MENU-->
         <nav class="navbar navbar-expand-xl">
@@ -128,7 +139,10 @@
                 <img src="../../assets/panel_users/img/avatar.png"alt="Avatar"class="tm-avatar img-fluid mb-4"/>
                 <a href="#" class="tm-avatar-delete-link"><i class="far fa-trash-alt tm-product-delete-icon"></i></a>
               </div>
-              <button class="btn btn-primary btn-block text-uppercase">آپلود عکس جدید</button>
+              <div class="custom-file mt-3 mb-3">
+                <input id="fileInput" type="file" style="display:none;" />
+                <input type="button"class="btn btn-primary btn-block mx-auto"value="بارگذاری عکس جدید"onclick="document.getElementById('fileInput').click();"/>
+              </div>
             </div>
 
           </div>
