@@ -1,3 +1,7 @@
+<?php
+$db=mysqli_connect('127.0.0.1','root','','Cookinginstruction');
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -82,14 +86,14 @@ src: url(assets/Font/Vazir-Medium.eot) format('eot'),
                 <form>
                     <div class="mb-3" style="text-align: right;">
                         <label class="form-label" for="email">ایمیل</label>
-                        <input class="form-control item" type="email" id="email"></div>
+                        <input class="form-control item" type="email" name="email" id="email"></div>
 
                     <div class="mb-3" style="text-align: right;">
                         <label class="form-label" for="password" style="text-align: right;font-size: 18px;">رمز</label>
-                        <input class="form-control" type="password" id="password"></div>
+                        <input class="form-control" type="password" id="password name="password""></div>
                     <div class="mb-3">
                         <div class="form-check"><input class="form-check-input" type="checkbox" id="checkbox"><label class="form-check-label" for="checkbox">مرا به خاطر بسپار</label></div>
-                    </div><button class="btn btn-primary" type="submit" style="font-size: 17px;font-weight: bold;">ورود</button>
+                    </div><button class="btn btn-primary" name="btnlogin" type="submit" style="font-size: 17px;font-weight: bold;">ورود</button>
                 </form>
             </div>
         </section>
@@ -132,3 +136,20 @@ src: url(assets/Font/Vazir-Medium.eot) format('eot'),
 </body>
 
 </html>
+<?php
+if(isset($_POST['btnlogin']))
+{
+    $email=$_POST['email'];
+    $password=md5($_POST['password']);
+    $check=mysqli_query($db,"select * from users where email='$email' and passwod='$password'");
+    if(mysqli_num_rows($check)>0)
+    {
+        $_SESSION['user']=$email;
+        echo "<script>alert('  OOOOK     .')</script>";
+        header("Location: index.php");
+    }
+    else {
+        echo "<script>alert('ایمیل یا گذرواژه خود را اشتباه وارد نموده اید یا ثبت نام نکرده اید.')</script>";
+    }
+}
+?>
