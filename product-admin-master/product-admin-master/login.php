@@ -1,3 +1,10 @@
+<?php
+$db=mysqli_connect('127.0.0.1','root','','Cookinginstruction');
+mysqli_query($db, "SET NAMES utf8");
+session_start();
+// // $query=mysqli_query($db," select * from users where= `email` = "$"");
+// $_SESSION["user"] = "yellow";
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -40,7 +47,7 @@
       <!--MENU-->
         <nav class="navbar navbar-expand-xl">
             <div class="container h-100">
-                <a class="navbar-brand" href="index.html">
+                <a class="navbar-brand" href="index.php">
                     <h1 class="tm-site-title mb-0">پروفایل کاربر</h1>
                 </a>
                 <button class="navbar-toggler ml-auto mr-0" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -51,7 +58,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mx-auto h-100">
                         <li class="nav-item">
-                            <a class="nav-link active" href="#">
+                            <a class="nav-link active" href="index.php">
                                 <i class="fas fa-tachometer-alt"></i>
                                 داشبورد
                                 <span class="sr-only">(current)</span>
@@ -73,14 +80,14 @@
                             </div>
                         </li>-->
                         <li class="nav-item">
-                            <a class="nav-link" href="products.html">
+                            <a class="nav-link" href="products.php">
                                 <i class="fas fa-shopping-cart"></i>
                                 مقالات
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="accounts.html">
+                            <a class="nav-link" href="accounts.php">
                                 <i class="far fa-user"></i>
                                 حساب کاربری
                             </a>
@@ -100,9 +107,10 @@
                             </div>
                         </li>-->
                     </ul>
+                    
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link d-block" href="login.html">
+                            <a class="nav-link d-block" href="login.php">
                                 کاربر, <b>خروج</b> </a>
                         </li>
                     </ul>
@@ -123,17 +131,17 @@
             </div>
             <div class="row mt-2">
               <div class="col-12">
-                <form action="index.html" method="post" class="tm-login-form">
+                <form action="login.php" method="post" class="tm-login-form">
                   <div class="form-group">
-                    <label for="username">نام کاربری</label>
-                    <input name="username"type="text"class="form-control validate"id="username"value=""required/>
+                    <label for="email">نام کاربری</label>
+                    <input name="email"type="email"class="form-control validate"id="email"value=""required/>
                   </div>
                   <div class="form-group mt-3">
                     <label for="password">کلمه عبور</label>
                     <input name="password"type="password"class="form-control validate"id="password"value=""required/>
                   </div>
                   <div class="form-group mt-4">
-                    <button type="submit"class="btn btn-primary btn-block text-uppercase">ورود</button>
+                    <button type="submit" name="login" class="btn btn-primary btn-block text-uppercase">ورود</button>
                   </div> 
 
                   <button class="mt-5 btn btn-primary btn-block text-uppercase"> رمز عبور خود را فراموش کرده اید؟ </button>
@@ -156,5 +164,28 @@
     <!-- https://jquery.com/download/ -->
     <script src="js/bootstrap.min.js"></script>
     <!-- https://getbootstrap.com/ -->
+
+
+
+
+
+
+
   </body>
 </html>
+<?php
+if(isset($_POST['login']))
+{
+    $email=$_POST['email'];
+    $password=md5($_POST['password']);
+    $check=mysqli_query($db,"select * from users where email='$email' and passwod='$password'");
+    if(mysqli_num_rows($check)>0)
+    {
+        $_SESSION['user']=$email;
+        header("Location: index.php");
+    }
+    else {
+        echo "<script>alert('ایمیل یا گذرواژه خود را اشتباه وارد نموده اید یا ثبت نام نکرده اید.')</script>";
+    }
+}
+?>
