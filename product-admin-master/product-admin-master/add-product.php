@@ -45,7 +45,7 @@ session_start();
       <!--MENU-->
         <nav class="navbar navbar-expand-xl">
             <div class="container h-100">
-                <a class="navbar-brand" href="index.html">
+                <a class="navbar-brand" href="index.php">
                     <h1 class="tm-site-title mb-0">پروفایل کاربر</h1>
                 </a>
                 <button class="navbar-toggler ml-auto mr-0" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -56,7 +56,7 @@ session_start();
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mx-auto h-100">
                         <li class="nav-item">
-                            <a class="nav-link active" href="#">
+                            <a class="nav-link active" href="index.php">
                                 <i class="fas fa-tachometer-alt"></i>
                                 داشبورد
                                 <span class="sr-only">(current)</span>
@@ -119,8 +119,8 @@ session_start();
                       ?>
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link d-block" href="login.php">
-                                کاربر, <b>خروج</b> </a>
+                            <a class="nav-link d-block" href="logout.php">
+                                 <b>خروج</b> </a>
                         </li>
                     </ul>
                 </div>
@@ -140,23 +140,19 @@ session_start();
             </div>
             <div class="row tm-edit-product-row">
               <div class="col-xl-6 col-lg-6 col-md-12">
-                <form action="add-product.php" method="post" class="tm-edit-product-form">
-
+              <form action="add-product.php" method="post" class="form-group" enctype="multipart/form-data">
                   <div class="form-group mb-3">
                     <label for="name">نام مقاله</label>
-                    <input id="name" name="name" type="text" value="" class="form-control validate">
+                    <input id="name"name="name" type="text" class="form-control validate"required/>
                   </div>
-
-                  <div class="form-group mb-3">
+                   <div class="form-group mb-3">
                     <label for="pdate"> تاریخ ایجاد</label>
                     <input id="pdate"name="pdate" type="text" class="form-control validate"required/ value="<?php echo date("Y/m/d");?>">
                   </div>
-
-                  <div class="form-group mb-3">
+                 <div class="form-group mb-3">
                     <label for="pcreator"> سازنده </label>
                     <input id="pcreator"name="pcreator" type="text" class="form-control validate"required/ value="<?php echo $_SESSION['user']; ?>">
                   </div>
-
                   <div class="form-group mb-3">
                     <label for="description">شرح</label>
                     <textarea name="pdesc" class="form-control validate" rows="3" required/ ></textarea>
@@ -190,9 +186,10 @@ session_start();
                   <i class="fas fa-cloud-upload-alt tm-upload-icon"onclick="document.getElementById('fileInput').click();"></i>
                 </div>
                 <div class="custom-file mt-3 mb-3">
-                <input type="file" name="pimage"class="btn btn-primary btn-block mx-auto">
-                  <!-- <input id="fileInput" type="file" style="display:none;" /> -->
-                  <!-- <input type="button"class="btn btn-primary btn-block mx-auto"value="آپلود تصویر مقاله"onclick="document.getElementById('fileInput').click();"/> -->
+                <!-- <input type="file" name="pimage"> -->
+                    <input type="file" name="pimage"class="btn btn-primary btn-block mx-auto"> 
+                  <!-- <input  id="fileInput" type="file" style="display:none;" /> -->
+                  <!-- <input type="file"  name="pimage" class="btn btn-primary btn-block mx-auto"value="آپلود تصویر مقاله"onclick="document.getElementById('fileInput').click();"/> -->
                 </div>
               </div>
               <div class="col-12">
@@ -227,10 +224,7 @@ session_start();
       });
     </script>
 
-
-
-
-      
+            
 <?php
 if(isset($_POST['save'])){
     $name=$_POST['name'];
