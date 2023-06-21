@@ -1,3 +1,9 @@
+<?php
+$db=mysqli_connect('127.0.0.1','root','','Cookinginstruction');
+mysqli_query($db,"SET NAMES UTF8");
+session_start();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -14,15 +20,27 @@
       <link rel="stylesheet" href="../../assets/panel_users/css/bootstrap.min.css" />
       <!-- https://getbootstrap.com/ -->
       <link rel="stylesheet" href="../../assets/panel_users/css/templatemo-style.css">
-      <link rel="stylesheet" href="../../assets/css/menu1.css">
+     
 
     <!--
 	Product Admin CSS Template
 	https://templatemo.com/tm-524-product-admin
 	-->
+  <style>
+    
+    @font-face {
+    font-family: vazir;
+    src: url(../../assets/Font/Vazir-Medium.eot) format('eot'),
+         url(../../assets/Font/Vazir-Medium.ttf) format('ttf'),
+         url(../../assets/Font/Vazir-Medium.woff) format('woff'),
+         url(../../assets/Font/Vazir-Medium.woff2) format('woff2');
+}
+   
+</style>
+
   </head>
 
-  <body id="reportsPage" dir="rtl" style=" text-align:right; ">
+  <body id="reportsPage" dir="rtl" style=" text-align:right;font-family: vazir; ">
     <div class="" id="home">
       <!--MENU-->
         <nav class="navbar navbar-expand-xl">
@@ -60,14 +78,14 @@
                             </div>
                         </li>-->
                         <li class="nav-item">
-                            <a class="nav-link" href="products.html">
+                            <a class="nav-link" href="products.php">
                                 <i class="fas fa-shopping-cart"></i>
                                 مقالات
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="accounts.html">
+                            <a class="nav-link" href="accounts.php">
                                 <i class="far fa-user"></i>
                                 حساب کاربری
                             </a>
@@ -87,9 +105,21 @@
                             </div>
                         </li>-->
                     </ul>
+                    <?php
+                       if(isset($_SESSION['user'])){
+                      ?>
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link d-block" href="login.html">
+                            <a class="" href="#" style="text-decoration: none; color:white;">
+                                کاربر,  <?php echo $_SESSION['user']; ?> </a>
+                        </li>
+                    </ul>
+                    <?php
+                       }
+                      ?>
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link d-block" href="login.php">
                                 کاربر, <b>خروج</b> </a>
                         </li>
                     </ul>
@@ -110,27 +140,36 @@
             </div>
             <div class="row tm-edit-product-row">
               <div class="col-xl-6 col-lg-6 col-md-12">
-                <form action="" class="tm-edit-product-form">
+                <form action="add-product.php" method="post" class="tm-edit-product-form">
 
                   <div class="form-group mb-3">
                     <label for="name">نام مقاله</label>
-                    <input id="name"name="name" type="text" class="form-control validate"required/>
+                    <input id="name" name="name" type="text" value="" class="form-control validate">
+                  </div>
+
+                  <div class="form-group mb-3">
+                    <label for="pdate"> تاریخ ایجاد</label>
+                    <input id="pdate"name="pdate" type="text" class="form-control validate"required/ value="<?php echo date("Y/m/d");?>">
+                  </div>
+
+                  <div class="form-group mb-3">
+                    <label for="pcreator"> سازنده </label>
+                    <input id="pcreator"name="pcreator" type="text" class="form-control validate"required/ value="<?php echo $_SESSION['user']; ?>">
                   </div>
 
                   <div class="form-group mb-3">
                     <label for="description">شرح</label>
-                    <textarea class="form-control validate"rows="3"required></textarea>
+                    <textarea name="pdesc" class="form-control validate" rows="3" required/ ></textarea>
                   </div>
 
                   <div class="form-group mb-3">
                     <label for="category">دسته بندی</label>
                     <select
-                      class="custom-select tm-select-accounts"
-                      id="category">
+                      class="custom-select tm-select-accounts" name="category" id="category">
                       <option selected>دسته را انتخاب کنید</option>
-                      <option value="1">ورود جدید</option>
-                      <option value="2">محبوبترین</option>
-                      <option value="3">پرطرفدار</option>
+                      <option value="ایرانی"> ایرانی</option>
+                      <option value="فرنگی">فرنگی</option>
+                      
                     </select>
                   </div>
                  <!--<div class="row">
@@ -151,12 +190,13 @@
                   <i class="fas fa-cloud-upload-alt tm-upload-icon"onclick="document.getElementById('fileInput').click();"></i>
                 </div>
                 <div class="custom-file mt-3 mb-3">
-                  <input id="fileInput" type="file" style="display:none;" />
-                  <input type="button"class="btn btn-primary btn-block mx-auto"value="آپلود تصویر مقاله"onclick="document.getElementById('fileInput').click();"/>
+                <input type="file" name="pimage"class="btn btn-primary btn-block mx-auto">
+                  <!-- <input id="fileInput" type="file" style="display:none;" /> -->
+                  <!-- <input type="button"class="btn btn-primary btn-block mx-auto"value="آپلود تصویر مقاله"onclick="document.getElementById('fileInput').click();"/> -->
                 </div>
               </div>
               <div class="col-12">
-                <button type="submit" class="btn btn-primary btn-block text-uppercase">اکنون مقاله را اضافه کنید</button>
+                <button type="submit" name="save" class="btn btn-primary btn-block text-uppercase">اکنون مقاله را اضافه کنید</button>
               </div>
             </form>
             </div>
@@ -186,5 +226,66 @@
         $("#expire_date").datepicker();
       });
     </script>
+
+
+
+
+      
+<?php
+if(isset($_POST['save'])){
+    $name=$_POST['name'];
+    $pdesc=$_POST['pdesc'];
+    $pcreator=$_POST['pcreator'];
+    $pdate=$_POST['pdate'];
+    
+    
+    $category=$_POST['category'];
+    $file = $_FILES['pimage'];
+// بررسی آپلود شدن فایل
+    if ($file['error'] !== UPLOAD_ERR_OK) {
+        echo "<script>alert('رخداد خطا در هنگام آپلود فایل. لطفا مجددا تلاش نمایید')</script>";
+        return;
+    }
+
+// گرفتن پسوند فایل
+    $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
+
+// تعریف پسوندهای مجاز برای آپلود
+    $valid_extensions = array('jpg', 'jpeg', 'png', 'gif');
+
+// بررسی پسوند فایل با لیست سفید مجاز
+    if (false === in_array($extension, $valid_extensions)) {
+        echo "<script>alert('پسوند فایل انتخاب شده غیر مجاز است')</script>";
+        return;
+    }
+
+
+// فایل به درستی آپلود شده است و پسوند آن هم مجاز است
+    $destination = '../../assets/img/maghale/';
+    $filename = basename($file['name']);
+    $c=$destination . $filename;
+    if (file_exists($c)) {
+        echo "<script>alert('ببخشید!عکس با این نام موجود است')</script>";
+        return;
+    }
+
+// انتقال فایل با دستور مخصوص انتقال فایل‌های آپلودی
+    move_uploaded_file($file['tmp_name'], $destination . $filename);
+
+// نمایش پیام موفقیت آپلود
+    echo "<script>alert('آپلود فایل با موفقیت به انجام رسید')</script>";
+    $add=mysqli_query($db,"insert into maghale(`titel`,`content`,`creator`,`pic`,`date`,`categuri`) values
+    ('$name','$pdesc','$pcreator','$c','$pdate','$category')");
+    if($add){
+        echo "<script>alert('محصول با موفقیت اضافه شد.')</script>";
+    }
+    else{
+        echo "<script>alert('خطایی رخ داده است!لطفا مجددا تلاش کنید')</script>";
+    }
+}
+?>
+
+
+
   </body>
 </html>
